@@ -1,0 +1,20 @@
+const sharp = require('sharp')
+const path = require('path')
+const fs = require('fs')
+
+const imgPath = path.resolve(__dirname, './images/user.png')
+const outputPath = path.resolve(__dirname, './output/output.jpeg')
+
+// const writer = fs.createWriteStream(outputPath)
+
+sharp(imgPath)
+  // .metadata()
+  // .stats()
+  .resize(150, 150)
+  .flatten({ background: { r: 255, g: 255, b: 255 } })
+  .jpeg({ quality: 80 })
+  // .png()
+  // .pipe(writer)
+  .toFile(outputPath)
+  .then(console.log)
+  .catch(console.error)
